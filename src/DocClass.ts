@@ -12,8 +12,8 @@ export class DocClass extends DocElement {
         this.implements = data.implements || null;
         this.construct = data.construct;
 
-        this.adoptAll(data.props, DocProp);
-        this.adoptAll(data.methods, DocMethod);
-        this.adoptAll(data.events, DocEvent);
+        if (data.props) this.adoptAll(data.props, DocProp);
+        if (data.methods) this.adoptAll(data.methods, DocMethod);
+        if (data.events) this.adoptAll(data.events, DocEvent);
     }
 }

@@ -1,4 +1,4 @@
-import { DocBase, DocChildrenTypes, DocParentTypes, types } from "./DocBase";
+import { DocAllTypes, DocBase, DocParentTypes, types } from "./DocBase";
 import { stripIndents } from "common-tags";
 import type { Doc } from "./Doc";
 import {
@@ -21,7 +21,7 @@ import {
     JSDocReturns,
 } from "./JsDocTypes";
 import { MessageEmbed } from "./MessageEmbed";
-type RawDocumentedElement =
+export type RawDocumentedElement =
     | RawDocumentedClass
     | RawDocumentedEvent
     | RawDocumentedInterface
@@ -99,7 +99,7 @@ export class DocElement extends DocBase {
         else if (this.docType === DocElement.types.EVENT) return "e-";
         return null;
     }
-    get typeElement(): DocChildrenTypes | null {
+    get typeElement(): DocAllTypes | null {
         const { type } = this;
 
         if (!type) return null;

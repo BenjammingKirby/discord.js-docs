@@ -5,7 +5,7 @@ import { RawDocumentedEvent } from "./InterfacesForDocElements";
 export class DocEvent extends DocElement {
     constructor(parent: DocParentTypes, data: RawDocumentedEvent) {
         super(parent.doc, DocElement.types.EVENT, data, parent);
-        this.adoptAll(data.params, DocParam);
+        if (data.params) this.adoptAll(data.params, DocParam);
     }
 
     get formattedName(): string {

@@ -12,7 +12,7 @@ export class DocMethod extends DocElement {
         this.examples = data.examples || null;
         this.returns = data.returns || null;
         this.scope = data.scope || null;
-        this.adoptAll(data.params, DocParam);
+        if (data.params) this.adoptAll(data.params, DocParam);
     }
 
     get formattedName(): string {
