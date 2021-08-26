@@ -27,18 +27,8 @@ interface typesMapper {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Constr<T> = new (...args: any[]) => T;
-export type DocChildrenTypes = DocProp | DocParam | DocMethod | DocEvent;
 export type DocParentTypes = DocClass | DocInterface | DocMethod | DocEvent;
 export type DocAllTypes = DocClass | DocEvent | DocInterface | DocMethod | DocParam | DocProp | DocTypedef;
-export type DocAllTypesConst =
-    | typeof DocClass
-    | typeof DocEvent
-    | typeof DocInterface
-    | typeof DocMethod
-    | typeof DocParam
-    | typeof DocProp
-    | typeof DocTypedef;
-export type DocChildConstructor2 = typeof DocProp | typeof DocParam | typeof DocMethod | typeof DocEvent;
 export class DocBase {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public originalJSON: any;
@@ -66,7 +56,7 @@ export class DocBase {
 
         return filtered.length ? filtered : null;
     }
-    findChild(query: string, exclude: string[] = []): DocAllTypes | undefined {
+    findChild(query: string, exclude: DocAllTypes[] = []): DocAllTypes | undefined {
         query = query.toLowerCase();
 
         let docType: types | null = null;
@@ -80,7 +70,7 @@ export class DocBase {
         return Array.from(this.children.values()).find(
             (child) =>
                 child.name &&
-                !exclude.includes(child.name) &&
+                !exclude.includes(child) &&
                 child.name.toLowerCase() === query &&
                 (!docType || child.docType === docType),
         );
@@ -112,9 +102,6 @@ export class DocBase {
 
     get params(): DocParam[] | null {
         return this.childrenOfType(types.PARAM);
-    }
-    isParentType(): this is DocParentTypes {
-        return !("parent" in this);
     }
     static get types(): typeof types {
         return types;
