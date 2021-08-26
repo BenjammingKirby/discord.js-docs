@@ -38,6 +38,7 @@
         "array-callback-return":"error",
         "yoda":"error",
         "@typescript-eslint/no-unused-vars": ["error", {"varsIgnorePattern": "O_", "argsIgnorePattern": "O_"}],
-        "@typescript-eslint/ban-ts-comment": "off"
+        "@typescript-eslint/ban-ts-comment": "off",
+        "@typescript-eslint/no-non-null-assertion": "off"
     }
 }
