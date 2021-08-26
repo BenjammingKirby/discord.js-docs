@@ -106,7 +106,8 @@ export interface RawDocumentedClass {
     meta: RawDocumentedItemMeta;
 }
 export type RawDocumentedInterface = RawDocumentedClass;
-export interface RawDocumentedTypeDef {
+
+export interface RawDocumentedTypedef {
     name?: string;
     description?: string;
     see?: JSDocSee;
@@ -118,4 +119,22 @@ export interface RawDocumentedTypeDef {
     returns?: RawDocumentedVarType | undefined;
     returnsDescription?: string;
     meta: RawDocumentedItemMeta;
+}
+export interface RawDocumentedExternal {
+    name: string;
+    see: string[];
+    meta: RawDocumentedItemMeta;
+}
+
+export interface DataJSON {
+    meta: MainMeta;
+    classes: RawDocumentedClass[];
+    interfaces: RawDocumentedInterface[];
+    typedefs: RawDocumentedTypedef[];
+    externals: RawDocumentedExternal[];
+}
+export interface MainMeta {
+    generator: string;
+    format: number;
+    date: number;
 }

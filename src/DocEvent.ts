@@ -13,5 +13,3 @@ export class DocEvent extends DocElement {
         return `${this.parent.name}#${this.name}`;
     }
 }
-
-module.exports = DocEvent;

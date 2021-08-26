@@ -9,7 +9,7 @@ import {
     RawDocumentedFunction,
     RawDocumentedParam,
     RawDocumentedMember,
-    RawDocumentedTypeDef,
+    RawDocumentedTypedef,
 } from "./InterfacesForDocElements";
 import {
     JSDocDeprecated,
@@ -28,7 +28,7 @@ export type RawDocumentedElement =
     | RawDocumentedFunction
     | RawDocumentedParam
     | RawDocumentedMember
-    | RawDocumentedTypeDef;
+    | RawDocumentedTypedef;
 const DESCRIPTION_LIMIT = 1500;
 export interface EmbedOptions {
     excludePrivateElements?: boolean;
@@ -150,7 +150,9 @@ export class DocElement extends DocBase {
     }
 
     get formattedType(): string {
-        return `${this.nullable ? "?" : ""}${this.doc.formatType(this.type)}`;
+        const { type: thisType } = this;
+        if (!thisType) return "";
+        return `${this.nullable ? "?" : ""}${this.doc.formatType(thisType)}`;
     }
 
     get formattedExtends(): string {
@@ -304,7 +306,7 @@ export class DocElement extends DocBase {
     }
 
     formatInherits(inherits: JSDocImplements): string {
-        const flatInherits = inherits.flat(Infinity);
+        const flatInherits = inherits.flat(Infinity) as string[];
         return flatInherits.map((baseClass) => this.doc.formatType([baseClass])).join(" and ");
     }
 

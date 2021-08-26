@@ -23,7 +23,7 @@ export class DocMethod extends DocElement {
     get formattedReturn(): string {
         if (!this.returns) return "**Void**";
         const returnTypes = ("types" in this.returns ? this.returns.types : this.returns)
-            .map((type) => this.doc.formatType(Array.isArray(type) ? type.flat(5) : type))
+            .map((type) => this.doc.formatType(Array.isArray(type) ? type.flat(5) : [type]))
             .join(" or ");
 
         return [returnTypes, "description" in this.returns ? this.formatText(this.returns.description) : ""]
