@@ -60,9 +60,11 @@ class Doc extends DocBase {
   }
 
   get icon () {
-    if (!this.baseURL) return null
-    return `${this.baseURL}/favicon.ico`
-  }
+        if (!this.baseURL) return null;
+        return this.baseURL === "https://discord-akairo.github.io"
+            ? `${this.baseURL}/static/favicon.ico`
+            : `${this.baseURL}/favicon.ico`;
+    }
 
   get color () {
     switch (this.project) {
