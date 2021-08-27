@@ -77,7 +77,9 @@ export class Doc extends DocBase {
 
     get icon(): string | null {
         if (!this.baseURL) return null;
-        return `${this.baseURL}/favicon.ico`;
+        return this.baseURL === "https://discord-akairo.github.io"
+            ? `${this.baseURL}/static/favicon.ico`
+            : `${this.baseURL}/favicon.ico`;
     }
 
     get color(): number | null {
