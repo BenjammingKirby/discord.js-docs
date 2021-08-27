@@ -27,6 +27,7 @@
     "prettier": "^2.3.2"
   },
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "prepublish": "tsc"
   }
 }
