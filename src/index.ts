@@ -1,1 +1,2 @@
-export * from "./Doc";
+import { Doc } from "./Doc";
+export default Doc;
