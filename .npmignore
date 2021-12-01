@@ -10,3 +10,4 @@ src
 README.md
 .eslintignore
 .eslintrc.json
+!dist
