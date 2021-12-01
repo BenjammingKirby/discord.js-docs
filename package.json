@@ -13,8 +13,7 @@
     "node-fetch": "^2.6.1"
   },
   "scripts": {
-    "prepare": "tsc",
-    "prepack": "tsc",
+    "prepare": "npm run build",
     "build": "tsc"
   },
   "devDependencies": {
