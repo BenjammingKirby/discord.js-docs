@@ -6,3 +6,7 @@
 tsconfig.json
 yarn.lock
 package-lock.json
+src
+README.md
+.eslintignore
+.eslintrc.json
