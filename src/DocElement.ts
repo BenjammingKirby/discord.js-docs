@@ -20,7 +20,7 @@ import {
     JSDocScope,
     JSDocReturns,
 } from "./JsDocTypes";
-import { MessageEmbed } from "./MessageEmbed";
+import { APIEmbed } from "./MessageEmbed";
 export type RawDocumentedElement =
     | RawDocumentedClass
     | RawDocumentedEvent
@@ -174,7 +174,7 @@ export class DocElement extends DocBase {
         return this.scope === "static";
     }
 
-    embed(options = {}): MessageEmbed {
+    embed(options = {}): APIEmbed {
         const embed = this.doc.baseEmbed();
         let name = `__**${this.link}**__`;
 
@@ -195,7 +195,7 @@ export class DocElement extends DocBase {
         return embed;
     }
 
-    formatEmbed(embed: MessageEmbed, options: EmbedOptions = {}): void {
+    formatEmbed(embed: APIEmbed, options: EmbedOptions = {}): void {
         this.attachProps(embed, options);
         this.attachMethods(embed, options);
         this.attachEvents(embed);
@@ -205,7 +205,7 @@ export class DocElement extends DocBase {
         this.attachExamples(embed);
     }
 
-    attachProps(embed: MessageEmbed, { excludePrivateElements }: EmbedOptions = {}): void {
+    attachProps(embed: APIEmbed, { excludePrivateElements }: EmbedOptions = {}): void {
         if (!this.props) return;
 
         let props = this.props;
@@ -218,7 +218,7 @@ export class DocElement extends DocBase {
         });
     }
 
-    attachMethods(embed: MessageEmbed, { excludePrivateElements }: EmbedOptions = {}): void {
+    attachMethods(embed: APIEmbed, { excludePrivateElements }: EmbedOptions = {}): void {
         if (!this.methods) return;
 
         let methods = this.methods;
@@ -231,7 +231,7 @@ export class DocElement extends DocBase {
         });
     }
 
-    attachEvents(embed: MessageEmbed): void {
+    attachEvents(embed: APIEmbed): void {
         if (!this.events) return;
         if (!embed.fields) embed.fields = [];
         embed.fields.push({
@@ -240,7 +240,7 @@ export class DocElement extends DocBase {
         });
     }
 
-    attachParams(embed: MessageEmbed): void {
+    attachParams(embed: APIEmbed): void {
         if (!this.params) return;
         const params = this.params.map(
             (param) =>
@@ -260,7 +260,7 @@ export class DocElement extends DocBase {
         }
     }
 
-    attachReturn(embed: MessageEmbed): void {
+    attachReturn(embed: APIEmbed): void {
         if (!this.returns) return;
         if (!embed.fields) embed.fields = [];
         embed.fields.push({
@@ -269,7 +269,7 @@ export class DocElement extends DocBase {
         });
     }
 
-    attachType(embed: MessageEmbed): void {
+    attachType(embed: APIEmbed): void {
         if (!this.type) return;
         if (!embed.fields) embed.fields = [];
         embed.fields.push({
@@ -278,7 +278,7 @@ export class DocElement extends DocBase {
         });
     }
 
-    attachExamples(embed: MessageEmbed): void {
+    attachExamples(embed: APIEmbed): void {
         if (!this.examples) return;
         if (!embed.fields) embed.fields = [];
         embed.fields.push({

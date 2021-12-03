@@ -6,7 +6,7 @@ import { DocElementJSON, EmbedOptions } from "./DocElement";
 import { DocClass } from "./DocClass";
 import { DocTypedef } from "./DocTypedef";
 import { DocInterface } from "./DocInterface";
-import { MessageEmbed } from "./MessageEmbed";
+import { APIEmbed } from "./MessageEmbed";
 import { DataJSON } from "./InterfacesForDocElements";
 interface DocJSON {
     classes: DocElementJSON[];
@@ -148,7 +148,7 @@ export class Doc extends DocBase {
         return filtered;
     }
 
-    resolveEmbed(query: string, options: EmbedOptions = {}): MessageEmbed | null {
+    resolveEmbed(query: string, options: EmbedOptions = {}): APIEmbed | null {
         const element = this.get(...query.split(/\.|#/));
         if (element) return element.embed(options);
 
@@ -189,7 +189,7 @@ export class Doc extends DocBase {
         return json;
     }
 
-    baseEmbed(): MessageEmbed {
+    baseEmbed(): APIEmbed {
         const title =
             {
                 "discord.js": "Discord.js Docs",
