@@ -98,13 +98,13 @@ export class Doc extends DocBase {
         if (!parentTerm) return null;
         let elem = this.findChild(parentTerm);
         if (!elem || !lowerCasedTerms.length) return elem || null;
-        while (terms.length) {
-            const term = terms.shift();
+        while (lowerCasedTerms.length) {
+            const term = lowerCasedTerms.shift();
             if (!term || !elem) return null;
             const child = elem.findChild(term);
 
             if (!child) return null;
-            elem = terms.length && child.typeElement ? child.typeElement : child;
+            elem = lowerCasedTerms.length && child.typeElement ? child.typeElement : child;
         }
 
         return elem;
@@ -117,13 +117,13 @@ export class Doc extends DocBase {
         if (!parentTerm) return null;
         let elem = this.findChild(parentTerm);
         if (!elem || !lowerCasedTerms.length) return elem || null;
-        while (remainingTerms.length) {
-            const term = remainingTerms.shift();
+        while (lowerCasedTerms.length) {
+            const term = lowerCasedTerms.shift();
             if (!term || !elem) return null;
             const child = elem.findChild(term, exclude);
 
             if (!child) return null;
-            elem = remainingTerms.length && child.typeElement ? child.typeElement : child;
+            elem = lowerCasedTerms.length && child.typeElement ? child.typeElement : child;
         }
 
         return elem;
