@@ -24,7 +24,13 @@ const DJS = "discordjs";
 const AKAIRO = "discord-akairo";
 
 function dissectURL(url: string): [string, string, string] {
-    const parts = url.slice(34).split("/");
+    const replacedURL = url.replace("https://raw.githubusercontent.com/", "");
+    if (replacedURL.startsWith("discordjs")) {
+        const splitterRegex = /discordjs\/docs\/main\/(?<Repo>[^/]*)\/(?<Branch>[^/]*)/;
+        const { Repo, Branch } = replacedURL.match(splitterRegex)!.groups!;
+        return ["discordjs", Repo, Branch.replace(".json", "")];
+    }
+    const parts = replacedURL.split("/");
     return [parts[0], parts[1], parts[3].slice(0, -5)];
 }
 

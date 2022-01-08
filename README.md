@@ -1,4 +1,4 @@
-## discord.js docs
+# discord.js docs
 
 A parser and wrapper for the [discord.js](https://github.com/discordjs/discord.js) docs.
 
@@ -11,9 +11,10 @@ const Doc = require('discord.js-docs')
 ```
 
 ### Doc.fetch(sourceName[, options])
+
 Fetches and parses the docs for the given project.\
 `sourceName` can be any of the predefined values (`stable`, `main`, `commando`, `rpc`, `akairo`, `akairo-master` and `collection`)
-or an URL which will return the raw generated docs (e.g https://raw.githubusercontent.com/discordjs/discord.js/docs/main.json ).\
+or an URL which will return the raw generated docs (e.g <https://raw.githubusercontent.com/discordjs/docs/main/discord.js/stable.json> ).\
 Once a documentation is fetched it will be cached. Use `options.force` to avoid this behavior.
 
 **Params**:
@@ -35,6 +36,7 @@ const doc = await Doc.fetch(
 ```
 
 ### Doc#get(parent[, child1[ ...[, childN]]])
+
 Gets documention for one element. Multiple properties/methods can be chained.
 **Params**:
 
@@ -52,6 +54,7 @@ doc.get('message', 'guild', 'members')
 ```
 
 ### Doc#search(query)
+
 Searches the documentation using fuzzy search for the given query and returns top 10 hits.
 
 **Params**:
@@ -63,6 +66,7 @@ Searches the documentation using fuzzy search for the given query and returns to
 **Returns**: `Array<DocElement>?`
 
 ### Doc#resolveEmbed(query)
+
 Tries to resolve the query into a `DocElement` using `Doc#get`. The search terms are expected to be separated by `#` or `.`, example: `message#pin`. If an element cannot be resolved, falls back to `Doc#search`. The result is then formatted into an object representing a Discord embed which can be sent directly to a Discord channel.
 
 **Params**:
@@ -74,7 +78,9 @@ Tries to resolve the query into a `DocElement` using `Doc#get`. The search terms
 **Returns**: `object?`
 
 ### DocElement
-#### Properties:
+
+#### Properties
+
 - `doc` - the Doc this element originates from;
 - `docType` - the type of this documentation element. One of `class`, `event`, `interface`, `method`, `param`, `prop` and `typedef`;
 - `parent` - parent element if present;
@@ -87,11 +93,3 @@ Tries to resolve the query into a `DocElement` using `Doc#get`. The search terms
 - `nullable` - tells whether this element can be null;
 - `deprecated` - tells whether this element has been deprecated;
 - `access` - access level for this element. Defaults to `public`;
-
-
-
-
-
-
-
-
