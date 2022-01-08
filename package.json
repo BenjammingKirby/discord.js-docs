@@ -10,7 +10,7 @@
   "dependencies": {
     "@types/common-tags": "^1.8.1",
     "common-tags": "^1.8.0",
-    "discord-api-types": "^0.25.2",
+    "discord-api-types": "^0.26.1",
     "fuse.js": "3.4.6",
     "node-fetch": "^2.6.1"
   },
