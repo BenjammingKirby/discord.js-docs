@@ -77,7 +77,7 @@ export class Doc extends DocBase {
 
     get baseDocsURL(): string | null {
         if (!this.baseURL) return null;
-        const repo = ["discord.js", AKAIRO].includes(this.repo) ? "main" : this.repo;
+        const repo = [AKAIRO].includes(this.repo) ? "main" : this.repo;
         return `${this.baseURL}/#/docs/${repo}/${this.branch}`;
     }
 
