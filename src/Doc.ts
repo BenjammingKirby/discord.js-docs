@@ -135,13 +135,13 @@ export class Doc extends DocBase {
         return elem;
     }
 
-    search(query: string, { excludePrivateElements }: EmbedOptions = {}): DocAllTypes[] | null {
+    search(query: string, { excludePrivateElements, maxResults = 10 }: EmbedOptions = {}): DocAllTypes[] | null {
         const result = this.fuse.search<string>(query);
         if (!result.length) return null;
 
         const filtered: DocAllTypes[] = [];
 
-        while (result.length > 0 && filtered.length < 10) {
+        while (result.length > 0 && filtered.length < maxResults) {
             const firstResult = result.shift();
             if (!firstResult) continue;
             firstResult;

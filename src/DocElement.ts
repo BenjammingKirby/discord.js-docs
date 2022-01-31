@@ -32,6 +32,7 @@ export type RawDocumentedElement =
 const DESCRIPTION_LIMIT = 1500;
 export interface EmbedOptions {
     excludePrivateElements?: boolean;
+    maxResults?: number; 
 }
 export interface DocElementJSON {
     name?: string | null;
