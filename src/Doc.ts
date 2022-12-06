@@ -257,7 +257,7 @@ export class Doc extends DocBase {
         if (!force && cachedDoc) return cachedDoc;
 
         try {
-            const data = await fetch(url).then((res) => res.json());
+            const data = (await fetch(url).then((res) => res.json()) as DataJSON);
             const doc = new Doc(url, data);
             docCache.set(url, doc);
             return doc;
