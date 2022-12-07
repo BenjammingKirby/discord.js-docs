@@ -1,13 +1,14 @@
 import sourcesJSON from "./sources.json";
 import Fuse from "fuse.js";
-import fetch from "node-fetch";
-import { DocAllTypes, DocBase } from "./DocBase";
-import { DocElementJSON, EmbedOptions } from "./DocElement";
+import type { DocAllTypes } from "./DocBase";
+import { DocBase } from "./DocBase";
+import type { DocElementJSON, EmbedOptions } from "./DocElement";
 import { DocClass } from "./DocClass";
 import { DocTypedef } from "./DocTypedef";
 import { DocInterface } from "./DocInterface";
-import { APIEmbed } from "./MessageEmbed";
-import { DataJSON } from "./InterfacesForDocElements";
+import type { APIEmbed } from "./MessageEmbed";
+import type { DataJSON } from "./InterfacesForDocElements";
+import { request } from "undici";
 interface DocJSON {
     classes: DocElementJSON[];
     typedefs: DocElementJSON[];
@@ -28,7 +29,7 @@ function dissectURL(url: string): [string, string, string] {
     if (replacedURL.startsWith("discordjs")) {
         const splitterRegex =
             /(?:discordjs|discord-akairo)\/(?:docs\/main\/)?(?<Repo>[^/]*)\/(?:docs\/)?(?<Branch>[^/]*)/;
-        const { Repo= "unknown", Branch = "Unknown" } = replacedURL.match(splitterRegex)?.groups ?? {};
+        const { Repo = "unknown", Branch = "Unknown" } = replacedURL.match(splitterRegex)?.groups ?? {};
         return ["discordjs", Repo, Branch.replace(".json", "")];
     }
     const parts = replacedURL.split("/");
@@ -39,7 +40,7 @@ export class Doc extends DocBase {
     public project: string;
     public repo: string;
     public branch: string;
-    public fuse: Fuse<FuceFormatElement, Fuse.FuseOptions<FuceFormatElement>>;
+    public fuse: Fuse<FuceFormatElement>;
     constructor(public url: string, docs: DataJSON) {
         super(docs);
         // this.url = url;
@@ -54,10 +55,8 @@ export class Doc extends DocBase {
             threshold: 0.5,
             location: 0,
             distance: 80,
-            maxPatternLength: 32,
             minMatchCharLength: 1,
             keys: ["name", "id"],
-            id: "id",
         });
     }
 
@@ -67,12 +66,12 @@ export class Doc extends DocBase {
 
     get baseURL(): string | null {
         switch (this.project) {
-        case DJS:
-            return "https://discord.js.org";
-        case AKAIRO:
-            return "https://discord-akairo.github.io";
-        default:
-            return null;
+            case DJS:
+                return "https://discord.js.org";
+            case AKAIRO:
+                return "https://discord-akairo.github.io";
+            default:
+                return null;
         }
     }
 
@@ -91,12 +90,12 @@ export class Doc extends DocBase {
 
     get color(): number | null {
         switch (this.project) {
-        case DJS:
-            return 0x2296f3;
-        case AKAIRO:
-            return 0x87202f;
-        default:
-            return null;
+            case DJS:
+                return 0x2296f3;
+            case AKAIRO:
+                return 0x87202f;
+            default:
+                return null;
         }
     }
     get(...terms: string[]): DocAllTypes | null {
@@ -137,7 +136,7 @@ export class Doc extends DocBase {
     }
 
     search(query: string, { excludePrivateElements, maxResults = 10 }: EmbedOptions = {}): DocAllTypes[] | null {
-        const result = this.fuse.search<string>(query);
+        const result = this.fuse.search<FuceFormatElement>(query);
         if (!result.length) return null;
 
         const filtered: DocAllTypes[] = [];
@@ -145,9 +144,7 @@ export class Doc extends DocBase {
         while (result.length > 0 && filtered.length < maxResults) {
             const firstResult = result.shift();
             if (!firstResult) continue;
-            firstResult;
-            //@ts-ignore
-            const element = this._getWithExclude(filtered, ...firstResult.split("#"));
+            const element = this._getWithExclude(filtered, ...firstResult.item.id.split("#"));
             if (excludePrivateElements && element?.access === "private") continue;
             if (element) filtered.push(element);
         }
@@ -257,7 +254,7 @@ export class Doc extends DocBase {
         if (!force && cachedDoc) return cachedDoc;
 
         try {
-            const data = (await fetch(url).then((res) => res.json()) as DataJSON);
+            const data = (await request(url).then((res) => res.body?.json())) as DataJSON;
             const doc = new Doc(url, data);
             docCache.set(url, doc);
             return doc;

@@ -1,7 +1,7 @@
 import { DocElement } from "./DocElement";
 
 import type { DocParentTypes } from "./DocBase";
-import { RawDocumentedMember } from "./InterfacesForDocElements";
+import type { RawDocumentedMember } from "./InterfacesForDocElements";
 export class DocProp extends DocElement {
     constructor(parent: DocParentTypes, data: RawDocumentedMember) {
         super(parent.doc, DocElement.types.PROP, data, parent);

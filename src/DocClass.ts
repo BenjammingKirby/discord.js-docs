@@ -3,7 +3,7 @@ import { DocProp } from "./DocProp";
 import { DocMethod } from "./DocMethod";
 import { DocEvent } from "./DocEvent";
 import type { Doc } from "./Doc";
-import { RawDocumentedClass, RawDocumentedConstructor } from "./InterfacesForDocElements";
+import type { RawDocumentedClass, RawDocumentedConstructor } from "./InterfacesForDocElements";
 export class DocClass extends DocElement {
     public construct: RawDocumentedConstructor;
     constructor(doc: Doc, data: RawDocumentedClass) {

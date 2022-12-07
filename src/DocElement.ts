@@ -1,7 +1,8 @@
-import { DocAllTypes, DocBase, DocParentTypes, types } from "./DocBase";
+import type { DocAllTypes, DocParentTypes, types } from "./DocBase";
+import { DocBase } from "./DocBase";
 import { stripIndents } from "common-tags";
 import type { Doc } from "./Doc";
-import {
+import type {
     RawDocumentedItemMeta,
     RawDocumentedClass,
     RawDocumentedEvent,
@@ -11,7 +12,7 @@ import {
     RawDocumentedMember,
     RawDocumentedTypedef,
 } from "./InterfacesForDocElements";
-import {
+import type {
     JSDocDeprecated,
     JSDocExamples,
     JSDocAccess,
@@ -20,7 +21,7 @@ import {
     JSDocScope,
     JSDocReturns,
 } from "./JsDocTypes";
-import { APIEmbed } from "./MessageEmbed";
+import type { APIEmbed } from "./MessageEmbed";
 export type RawDocumentedElement =
     | RawDocumentedClass
     | RawDocumentedEvent
@@ -32,7 +33,7 @@ export type RawDocumentedElement =
 const DESCRIPTION_LIMIT = 1500;
 export interface EmbedOptions {
     excludePrivateElements?: boolean;
-    maxResults?: number; 
+    maxResults?: number;
 }
 export interface DocElementJSON {
     name?: string | null;
@@ -78,20 +79,20 @@ export class DocElement extends DocBase {
         const emoji = (char: string) => `:regional_indicator_${char}:`;
 
         switch (this.docType) {
-        case types.CLASS:
-            return emoji("c");
-        case types.EVENT:
-            return emoji("e");
-        case types.INTERFACE:
-            return emoji("i");
-        case types.METHOD:
-            return emoji("m");
-        case types.TYPEDEF:
-            return emoji("t");
-        case types.PROP:
-            return emoji("p");
-        default:
-            return null;
+            case types.CLASS:
+                return emoji("c");
+            case types.EVENT:
+                return emoji("e");
+            case types.INTERFACE:
+                return emoji("i");
+            case types.METHOD:
+                return emoji("m");
+            case types.TYPEDEF:
+                return emoji("t");
+            case types.PROP:
+                return emoji("p");
+            default:
+                return null;
         }
     }
 

@@ -1,11 +1,11 @@
-import { DocClass } from "./DocClass";
-import { RawDocumentedElement } from "./DocElement";
-import { DocEvent } from "./DocEvent";
-import { DocInterface } from "./DocInterface";
-import { DocMethod } from "./DocMethod";
-import { DocParam } from "./DocParam";
-import { DocProp } from "./DocProp";
-import { DocTypedef } from "./DocTypedef";
+import type { DocClass } from "./DocClass";
+import type { RawDocumentedElement } from "./DocElement";
+import type { DocEvent } from "./DocEvent";
+import type { DocInterface } from "./DocInterface";
+import type { DocMethod } from "./DocMethod";
+import type { DocParam } from "./DocParam";
+import type { DocProp } from "./DocProp";
+import type { DocTypedef } from "./DocTypedef";
 export enum types {
     CLASS = "class",
     EVENT = "event",
