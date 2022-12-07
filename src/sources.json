@@ -1,14 +1,18 @@
 {
-  "stable": "https://raw.githubusercontent.com/discordjs/docs/main/discord.js/stable.json",
-  "main": "https://raw.githubusercontent.com/discordjs/docs/main/discord.js/main.json",
-  "v12": "https://raw.githubusercontent.com/discordjs/docs/main/discord.js/v12.json",
+  "builders-stable": "https://raw.githubusercontent.com/discordjs/docs/main/builders/stable.json",
+  "builders-main": "https://raw.githubusercontent.com/discordjs/docs/main/builders/main.json",
+  "discord.js-stable": "https://raw.githubusercontent.com/discordjs/docs/main/discord.js/stable.json",
+  "discord.js-main": "https://raw.githubusercontent.com/discordjs/docs/main/discord.js/main.json",
+  "discord.js-v12": "https://raw.githubusercontent.com/discordjs/docs/main/discord.js/v12.json",
+  "discord.js-v13": "https://raw.githubusercontent.com/discordjs/docs/main/discord.js/v13.json",
   "commando": "https://raw.githubusercontent.com/discordjs/commando/docs/master.json",
   "rpc": "https://raw.githubusercontent.com/discordjs/rpc/docs/master.json",
   "akairo": "https://raw.githubusercontent.com/discord-akairo/discord-akairo/docs/8.1.0.json",
   "collection": "https://raw.githubusercontent.com/discordjs/docs/main/collection/stable.json",
   "collection-main": "https://raw.githubusercontent.com/discordjs/docs/main/collection/main.json",
-  "builders": "https://raw.githubusercontent.com/discordjs/docs/main/builders/stable.json",
-  "builders-main": "https://raw.githubusercontent.com/discordjs/docs/main/builders/main.json",
   "voice": "https://raw.githubusercontent.com/discordjs/docs/main/voice/stable.json",
-  "voice-main": "https://raw.githubusercontent.com/discordjs/docs/main/voice/main.json"
+  "voice-main": "https://raw.githubusercontent.com/discordjs/docs/main/voice/main.json",
+  "rest-main": "https://raw.githubusercontent.com/discordjs/docs/main/rest/main.json",
+  "proxy-main": "https://raw.githubusercontent.com/discordjs/docs/main/proxy/main.json",
+  "ws-main": "https://raw.githubusercontent.com/discordjs/docs/main/ws/main.json"
 }

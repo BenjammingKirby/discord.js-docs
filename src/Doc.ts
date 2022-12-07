@@ -41,6 +41,7 @@ export class Doc extends DocBase {
     public repo: string;
     public branch: string;
     public fuse: Fuse<FuceFormatElement>;
+    // public sources: { [key: string]: string } = sourcesJSON;
     constructor(public url: string, docs: DataJSON) {
         super(docs);
         // this.url = url;
@@ -248,18 +249,29 @@ export class Doc extends DocBase {
         return sources;
     }
 
+    static async addSources(newSources: Array<{ sourceName: string; url: string }>) {
+        for (const { sourceName, url } of newSources) {
+            await Doc.fetchSourceAndCache(url).catch((err) => {
+                throw err;
+            });
+            sources[sourceName] = url;
+        }
+    }
     static async fetch(sourceName: string, { force }: { force?: boolean } = {}): Promise<Doc> {
         const url = sources[sourceName] || sourceName;
         const cachedDoc = docCache.get(url);
         if (!force && cachedDoc) return cachedDoc;
-
+        return Doc.fetchSourceAndCache(url);
+    }
+    private static async fetchSourceAndCache(url: string) {
         try {
-            const data = (await request(url).then((res) => res.body?.json())) as DataJSON;
+            const res = await request(url);
+            const data = (await res.body?.json()) as DataJSON;
             const doc = new Doc(url, data);
             docCache.set(url, doc);
             return doc;
         } catch (err) {
-            throw new Error("invalid source name or URL.");
+            throw new Error("Invalid source name or URL.: " + url);
         }
     }
 }
