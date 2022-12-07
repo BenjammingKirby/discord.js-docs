@@ -245,7 +245,7 @@ export class Doc extends DocBase {
         return `https://github.com/discordjs/${project}/blob/${branch}/`;
     }
 
-    static sources(): typeof sources {
+    static get sources(): typeof sources {
         return sources;
     }
 
